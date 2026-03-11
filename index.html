@@ -1,341 +1,308 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-  <link rel="icon" type="image/png" href="Capture d’écran 2025-02-21 à 17.58.29.png">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Dr Amine Khadiri - Cardiologue à Casablanca. Consultations, échographie cardiaque, Holter, test d'effort, conseils cardiovasculaires et prise de rendez-vous en ligne.">
-  <title>Dr Amine Khadiri | Cardiologue Casablanca</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      background-color: #f9f9f9;
-    }
-    header, footer {
-      background-color: #ffffff;
-      color: #222;
-      padding: 1rem 2rem;
-      text-align: center;
-    }
-    nav {
-      background-color: #eeeeee;
-      color: #222;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      padding: 0.5rem;
-    }
-    nav a {
-      color: #222;
-      text-decoration: none;
-      font-size: 1rem;
-    }
-    section {
-      padding: 2rem;
-      max-width: 1000px;
-      margin: auto;
-      background-color: white;
-      margin-top: 1rem;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h1, h2 {
-      color: #333;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    ul li::before {
-      content: "✔️ ";
-      color: #94d2bd;
-    }
-    .contact {
-      background-color: #eee;
-      padding: 1rem;
-      margin-top: 2rem;
-      border-left: 5px solid #ee9b00;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-    input, textarea {
-      padding: 0.5rem;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-    button {
-      background-color: #008080;
-      color: white;
-      padding: 0.7rem;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-    .cta {
-      text-align: center;
-      margin-top: 2rem;
-    }
-    @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      section {
-        padding: 1rem;
-        margin: 1rem;
-      }
-      iframe {
-        height: 300px;
-      }
-    }
-    @keyframes logoPulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.05); opacity: 0.9; }
-    100% { transform: scale(1); opacity: 1; }
-  }
-</style>
-<style>
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 1s ease forwards;
-    }
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    .fade-delay-1 { animation-delay: 0.2s; }
-    .fade-delay-2 { animation-delay: 0.4s; }
-    .fade-delay-3 { animation-delay: 0.6s; }
-    .fade-delay-4 { animation-delay: 0.8s; }
-    .fade-delay-5 { animation-delay: 1s; }
-  </style>
-</head>
-<body style="scroll-behavior: smooth; background-image: linear-gradient(to bottom, #f4f7f9, #ffffff);">
-  <div style="background-color:#f5f5f5; color:#222; text-align:center; padding: 0.5rem 1rem; font-size: 0.95rem;">
-  <img src="logo.jpg" alt="Logo Cabinet Cardiologie" style="height: 100px; margin-bottom: 10px; animation: logoPulse 2s infinite ease-in-out;">
-  <h1 style="font-family: 'Georgia', serif; text-transform: uppercase; letter-spacing: 1px; font-size: 1.8rem;">Dr Amine Khadiri</h1>
-    <p>Cardiologue à Casablanca</p>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="PWA de suivi AVK/Sintrom: calcul de dosage, historique INR, TTR et alertes d'instabilité."
+    />
+    <meta name="theme-color" content="#0f4c81" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <title>AVK Care - Gestion Sintrom</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body class="bg-slate-100 min-h-screen">
+    <div id="root"></div>
 
-  <nav>
-    <a href="#accueil">Accueil</a>
-    <a href="#apropos">À propos</a>
-    <a href="#services">Services</a>
-    <a href="#rdv">Rendez-vous</a>
-    <a href="#blog">Blog</a>
-    <a href="#contact">Contact</a>
-  </nav>
+    <script type="text/babel">
+      const { useEffect, useMemo, useState } = React;
 
-  <section id="accueil" class="fade-in fade-delay-1" style="background: linear-gradient(120deg, #007B83, #00A3A3); color:white; text-align:center; padding: 4rem 2rem; border-radius: 0; box-shadow: inset 0 -5px 15px rgba(0,0,0,0.2);">
-  <h1 style="font-size:2.5rem; margin-bottom:1rem;">Votre cœur entre de bonnes mains</h1>
-  <p style="font-size:1.2rem; max-width:700px; margin:auto;">Bienvenue sur le site du Dr Amine Khadiri, cardiologue à Casablanca. Suivi complet, prévention, examens et accompagnement sur mesure pour toutes les pathologies cardiovasculaires.</p>
-  <div style="margin-top:2rem;">
-    <a href="#rdv" style="background-color:#ee9b00; color:white; padding: 0.8rem 1.5rem; border-radius:30px; text-decoration:none; font-weight:bold; font-size:1.1rem;">Prendre rendez-vous</a>
-  </div>
-</section>
+      const defaultProfile = {
+        fullName: "",
+        age: "",
+        weight: "",
+        indication: "ACFA",
+        targetMin: 2,
+        targetMax: 3,
+        currentWeeklyDoseMg: 14,
+        tabletMg: 4,
+      };
 
-  <section id="apropos" class="fade-in fade-delay-2">
-  <h2>À propos</h2>
-  <p>Je suis le Dr Amine Khadiri, spécialiste en cardiologie, formé dans les meilleures institutions universitaires, avec une solide expérience hospitalière et libérale. Passionné par les sciences cardiovasculaires, je mets un point d'honneur à offrir une prise en charge individualisée, bienveillante et basée sur les dernières recommandations médicales.</p>
-  <p>J'accorde une grande importance à la prévention et à l’éducation du patient. Grâce à des outils modernes et à une écoute attentive, je vous accompagne dans toutes les étapes de votre parcours de soin, du dépistage aux traitements complexes.</p>
-</section>
+      const indicationOptions = ["ACFA", "Valve mécanique", "TVP/EP", "Autre"];
 
-  <section id="services" class="fade-in fade-delay-3" style="background-color:#e0f2f1; padding: 3rem 1rem;">
-  <h2 style="text-align:center; color:#005f73; font-size:2rem;">Nos Services Cardiologiques</h2>
-  <p style="text-align:center; max-width:800px; margin:auto;">Des examens de pointe et un accompagnement de qualité pour chaque étape de votre santé cardiaque.</p>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
-    <div style="background:white; padding:1rem; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
-      <h3>🩺 Consultation Cardiologique</h3>
-      <p>Évaluation personnalisée des symptômes cardiaques et dépistage des maladies cardiovasculaires.</p>
-    </div>
-    <div style="background:white; padding:1rem; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
-      <h3>🫀 Échographie Cardiaque</h3>
-      <p>Visualisation des structures du cœur : valves, cavités, flux sanguins.</p>
-    </div>
-    <div style="background:white; padding:1rem; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
-      <h3>📈 Holter ECG & TA</h3>
-      <p>Enregistrement continu du rythme cardiaque ou de la pression artérielle sur 24h.</p>
-    </div>
-    <div style="background:white; padding:1rem; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
-      <h3>🚴‍♂️ Test d’effort</h3>
-      <p>Évaluation de la tolérance à l'effort et recherche d'ischémie cardiaque.</p>
-    </div>
-    <div style="background:white; padding:1rem; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
-      <h3>🔬 Écho de stress</h3>
-      <p>Simulation d’un effort pour détecter des anomalies non visibles au repos.</p>
-    </div>
-    <div style="background:white; padding:1rem; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
-      <h3>📝 Bilan préopératoire</h3>
-      <p>Analyse du risque cardiovasculaire avant toute intervention chirurgicale.</p>
-    </div>
-    <div style="background:white; padding:1rem; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
-      <h3>🔄 Suivi des pathologies chroniques</h3>
-      <p>Suivi rigoureux de l’insuffisance cardiaque, valvulopathies, antécédents d’infarctus.</p>
-    </div>
-    <div style="background:white; padding:1rem; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1);">
-      <h3>🍏 Prévention & conseils</h3>
-      <p>Programme hygiéno-diététique, arrêt du tabac, gestion du stress et activité physique.</p>
-    </div>
-  </div>
-</section>
+      const load = (key, fallback) => {
+        try {
+          const raw = localStorage.getItem(key);
+          return raw ? JSON.parse(raw) : fallback;
+        } catch {
+          return fallback;
+        }
+      };
 
-  <section id="rdv" class="fade-in fade-delay-4">
-    <h2>Prise de rendez-vous</h2>
-    <p>Réservez facilement votre consultation :</p>
-    <div class="contact">
-      <p><strong>Téléphone :</strong> 0522 86 35 86 / 06 45 86 35 86</p>
-      <p><strong>Email général :</strong> dr.khadiriamine@gmail.com</p>
-    </div>
-    <form action="https://formspree.io/f/mwkgyoqg" method="POST">
-      <input type="hidden" name="destinataire" value="drkhadiricabinet@gmail.com">
-      <label for="name">Nom complet :</label>
-      <input type="text" id="name" name="Nom complet" required>
+      const roundQuarter = (value) => Math.max(0, Math.round(value * 4) / 4);
 
-      <label for="email">Adresse e-mail :</label>
-      <input type="email" id="email" name="Adresse e-mail" required>
+      const getAdjustment = (inr, min, max) => {
+        if (inr < min - 0.5) return 0.2;
+        if (inr < min) return 0.1;
+        if (inr > max + 1) return -0.2;
+        if (inr > max) return -0.1;
+        return 0;
+      };
 
-      <label for="message">Message ou demande de rendez-vous :</label>
-      <textarea id="message" name="Message" rows="5" required></textarea>
+      const buildWeeklyPlan = (weeklyDoseMg, tabletMg) => {
+        const days = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
+        const totalQuarters = Math.round((weeklyDoseMg / tabletMg) * 4);
+        const base = Math.floor(totalQuarters / 7);
+        let extra = totalQuarters % 7;
+        return days.map((day) => {
+          const quarters = base + (extra > 0 ? 1 : 0);
+          if (extra > 0) extra -= 1;
+          return {
+            day,
+            quarters,
+            doseMg: roundQuarter((quarters / 4) * tabletMg),
+            tablets: roundQuarter(quarters / 4),
+          };
+        });
+      };
 
-      <button type="submit" style="background: linear-gradient(to right, #008080, #00b8a9); font-weight: bold;">Envoyer</button>
-    <p style="color: green; margin-top: 1rem; display: none;" id="formMessage">Merci pour votre message. Nous vous contacterons très vite.</p>
-</form>
-<script>
-  const form = document.querySelector('form');
-  const message = document.getElementById('formMessage');
-  form.addEventListener('submit', function (e) {
-    setTimeout(() => {
-      message.style.display = 'block';
-      form.reset();
-    }, 500);
-  });
-</script>
-  </section>
+      const calculateTTR = (entries, targetMin, targetMax) => {
+        if (!entries.length) return 0;
+        const inRange = entries.filter(
+          (e) => e.inr >= targetMin && e.inr <= targetMax
+        ).length;
+        return Math.round((inRange / entries.length) * 100);
+      };
 
-  <section id="blog" class="fade-in fade-delay-5">
-  <h2>Blog & Conseils</h2>
-  <div style="display: flex; flex-direction: column; gap: 2rem;">
+      const App = () => {
+        const [profile, setProfile] = useState(load("avk-profile", defaultProfile));
+        const [entries, setEntries] = useState(load("avk-entries", []));
+        const [form, setForm] = useState({
+          inr: "",
+          date: new Date().toISOString().slice(0, 10),
+        });
 
-    <div style="display: flex; gap: 1rem; align-items: center;">
-      <img src="images/hypertension.jpg" alt="Prévenir l'hypertension" style="width: 150px; border-radius: 8px;">
-      <div>
-        <h3>Comment prévenir l’hypertension ?</h3>
-        <p>Limiter le sel, pratiquer une activité physique régulière, éviter le stress chronique… des gestes simples mais puissants pour préserver vos artères !</p>
-      </div>
-    </div>
+        useEffect(() => localStorage.setItem("avk-profile", JSON.stringify(profile)), [profile]);
+        useEffect(() => localStorage.setItem("avk-entries", JSON.stringify(entries)), [entries]);
 
-    <div style="display: flex; gap: 1rem; align-items: center;">
-      <img src="images/alimentation.jpg" alt="Alimentation saine pour le cœur" style="width: 150px; border-radius: 8px;">
-      <div>
-        <h3>Alimentation & cœur : les bons réflexes</h3>
-        <p>Un cœur en bonne santé commence dans l’assiette : privilégiez les oméga-3, les fruits, les légumes, et évitez les graisses saturées.</p>
-      </div>
-    </div>
+        useEffect(() => {
+          if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("./sw.js").catch(() => {});
+          }
+        }, []);
 
-    <div style="display: flex; gap: 1rem; align-items: center;">
-      <img src="images/exercice.jpg" alt="Exercice et santé cardiaque" style="width: 150px; border-radius: 8px;">
-      <div>
-        <h3>Le rôle de l’activité physique</h3>
-        <p>30 minutes de marche rapide par jour réduisent significativement les risques d’infarctus et améliorent la tension artérielle.</p>
-      </div>
-    </div>
+        const sortedEntries = useMemo(
+          () => [...entries].sort((a, b) => new Date(a.date) - new Date(b.date)),
+          [entries]
+        );
 
-    <div style="display: flex; gap: 1rem; align-items: center;">
-      <img src="images/stress.jpg" alt="Stress et cœur" style="width: 150px; border-radius: 8px;">
-      <div>
-        <h3>Cholestérol, tabac, stress : les ennemis silencieux</h3>
-        <p>Ils agissent dans l’ombre mais multiplient les risques cardiovasculaires. Un dépistage régulier et un accompagnement adapté sont essentiels.</p>
-      </div>
-    </div>
+        const latest = sortedEntries[sortedEntries.length - 1];
+        const targetMid = (Number(profile.targetMin) + Number(profile.targetMax)) / 2;
 
-  </div>
-</section>
+        const recommendation = useMemo(() => {
+          if (!latest) return null;
+          const adjustment = getAdjustment(
+            latest.inr,
+            Number(profile.targetMin),
+            Number(profile.targetMax)
+          );
+          const newWeeklyDose = Math.max(
+            0,
+            roundQuarter(Number(profile.currentWeeklyDoseMg) * (1 + adjustment))
+          );
+          return {
+            adjustment,
+            newWeeklyDose,
+            plan: buildWeeklyPlan(newWeeklyDose, Number(profile.tabletMg)),
+          };
+        }, [latest, profile]);
 
-  <section id="temoignages">
-    <h2>Ce que disent mes patients</h2>
-    <p>Votre avis compte. Voici quelques témoignages de patients ayant consulté au cabinet :</p>
-    <ul>
-      <li><em>"Excellent cardiologue, très professionnel et à l'écoute. Il prend le temps d'expliquer les choses clairement."</em> – M. El Bouzidi</li>
-      <li><em>"Accueil chaleureux, diagnostics précis. Je recommande sans hésitation."</em> – Mme Ait Lahcen</li>
-      <li><em>"Après des mois d'errance médicale, le Dr Khadiri a enfin mis le doigt sur mon problème. Merci !"</em> – Yassine B.</li>
-    </ul>
-    <p>Vous souhaitez laisser un avis ? <a href="https://www.google.com/search?q=dr+amine+khadiri+avis" target="_blank">Cliquez ici pour écrire votre témoignage</a>.</p>
-  </section>
+        const ttr = calculateTTR(
+          sortedEntries,
+          Number(profile.targetMin),
+          Number(profile.targetMax)
+        );
 
-  <section id="faq">
-    <h2>Questions Fréquentes (FAQ)</h2>
-    <ul>
-      <li><strong>Quels sont les documents à apporter pour la première consultation ?</strong><br>Carte d'identité, carnet médical, anciens examens (ECG, échographies, analyses), ordonnance si traitement en cours.</li>
-      <li><strong>Est-ce que les consultations sont remboursées par la CNSS ou les assurances ?</strong><br>Oui, une facture détaillée vous sera remise pour remboursement par votre mutuelle ou assurance.</li>
-      <li><strong>Combien de temps dure une consultation ?</strong><br>En général entre 20 et 30 minutes selon la complexité du cas.</li>
-      <li><strong>Est-ce que je peux prendre rendez-vous en ligne ?</strong><br>Oui, via le formulaire ci-dessus ou par téléphone/WhatsApp.</li>
-      <li><strong>Quels examens sont réalisés au cabinet ?</strong><br>Échographie cardiaque, Holter ECG, Holter tensionnel, test d'effort, etc.</li>
-    </ul>
-  </section>
+        const instabilityAlert =
+          sortedEntries.length >= 4 && (ttr < 65 || Math.abs((latest?.inr ?? targetMid) - targetMid) > 1);
 
-  <section id="urgence">
-    <h2>Urgences Cardiovasculaires</h2>
-    <p>En cas de symptômes inquiétants tels que douleur thoracique brutale, essoufflement soudain, perte de connaissance, palpitations intenses ou œdèmes importants, il est essentiel d'agir rapidement.</p>
-    <p><strong>Consignes :</strong></p>
-    <ul>
-      <li>Appelez immédiatement le <strong>15 (SAMU)</strong> ou rendez-vous au service d’urgence le plus proche.</li>
-      <li>Ne pas prendre de médicament sans avis médical.</li>
-      <li>Si vous êtes un patient suivi au cabinet, contactez-nous dès que possible pour une évaluation rapide.</li>
-    </ul>
-    <p><strong>Urgences couvertes :</strong></p>
-    <ul>
-      <li>Syndromes coronaires aigus (infarctus, angor instable)</li>
-      <li>Embolie pulmonaire</li>
-      <li>Insuffisance cardiaque aiguë</li>
-      <li>Troubles du rythme sévères</li>
-      <li>Hypertension maligne</li>
-    </ul>
-    <p>La prise en charge rapide peut sauver des vies. Ne perdez pas de temps en cas de doute.</p>
-  </section>
+        const handleAddEntry = (e) => {
+          e.preventDefault();
+          const inr = Number(form.inr);
+          if (!inr || !form.date) return;
+          const newEntry = {
+            id: crypto.randomUUID(),
+            date: form.date,
+            inr,
+          };
+          setEntries((prev) => [...prev, newEntry]);
+          setForm((prev) => ({ ...prev, inr: "" }));
+        };
 
-  <section id="galerie" style="background-color:#f2fbfc;">
-    <h2>Galerie photos</h2>
-    <p>Découvrez le cabinet en images :</p>
-    <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
-      <img src="photo1.jpg" alt="Salle d'attente" style="width: 300px; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.2);">
-      <img src="photo2.jpg" alt="Cabinet de consultation" style="width: 300px; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.2);">
-      <img src="photo3.jpg" alt="Équipement échographie cardiaque" style="width: 300px; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.2);">
-    </div>
-    <p style="margin-top: 1rem; text-align:center;">Plus de photos à venir bientôt !</p>
-  </section>
+        const printReport = () => window.print();
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p><strong>Adresse :</strong> 119, Bd Moulay Driss 1ᵉʳ, 5ᵉ étage, Nr 9, Quartier Des Hôpitaux, 2 Mars, 20502, Casablanca, Maroc</p>
-    <p><strong>Horaires :</strong> Lundi à Vendredi : 9h – 19h | Samedi : 9h – 13h</p>
-  </section>
+        const points = sortedEntries.map((e, idx) => ({
+          x: sortedEntries.length === 1 ? 50 : (idx / (sortedEntries.length - 1)) * 100,
+          y: Math.max(0, 100 - (e.inr / 6) * 100),
+          ...e,
+        }));
 
-  <section id="map">
-    <h2>Nous trouver</h2>
-    <div style="width:100%;height:400px">
-      <iframe src="https://maps.google.com/maps?q=https://maps.app.goo.gl/bWSU54YoTpKRxyxd9&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-  </section>
+        const zoneTop = Math.max(0, 100 - (Number(profile.targetMax) / 6) * 100);
+        const zoneHeight = ((Number(profile.targetMax) - Number(profile.targetMin)) / 6) * 100;
 
-  <footer style="background-color:#008080; color:white;">
-    <p>&copy; 2025 – Dr Amine Khadiri – Cardiologue à Casablanca</p>
-    <p>Site sécurisé – Certificat SSL actif</p>
-    <div style="position: fixed; bottom: 20px; right: 20px;">
-    <a href="#top" style="background-color:#ee9b00; color:white; padding:10px 15px; border-radius:50%; text-decoration:none; font-size:20px;">↑</a>
-  </div>
-</footer>
-</body>
+        return (
+          <main className="max-w-6xl mx-auto p-4 md:p-8 space-y-6">
+            <header className="bg-white rounded-2xl shadow p-6 border border-slate-200">
+              <h1 className="text-2xl md:text-3xl font-bold text-sky-900">AVK Care - Suivi Sintrom</h1>
+              <p className="text-slate-600 mt-2">
+                Outil d'aide à la décision pour le suivi INR, la proposition de dose hebdomadaire et la
+                surveillance de la stabilité (TTR).
+              </p>
+              <p className="mt-3 text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-3">
+                ⚠️ Disclaimer: cette application est un outil d'aide. La décision thérapeutique finale
+                revient au médecin.
+              </p>
+            </header>
+
+            <section className="grid md:grid-cols-2 gap-6">
+              <article className="bg-white rounded-2xl shadow p-6 border border-slate-200">
+                <h2 className="text-xl font-semibold text-sky-800 mb-4">Profil patient</h2>
+                <div className="grid grid-cols-2 gap-3">
+                  <input className="border p-2 rounded col-span-2" placeholder="Nom"
+                    value={profile.fullName}
+                    onChange={(e) => setProfile({ ...profile, fullName: e.target.value })} />
+                  <input className="border p-2 rounded" type="number" placeholder="Âge"
+                    value={profile.age}
+                    onChange={(e) => setProfile({ ...profile, age: e.target.value })} />
+                  <input className="border p-2 rounded" type="number" placeholder="Poids (kg)"
+                    value={profile.weight}
+                    onChange={(e) => setProfile({ ...profile, weight: e.target.value })} />
+                  <select className="border p-2 rounded col-span-2"
+                    value={profile.indication}
+                    onChange={(e) => setProfile({ ...profile, indication: e.target.value })}>
+                    {indicationOptions.map((x) => <option key={x}>{x}</option>)}
+                  </select>
+                  <input className="border p-2 rounded" type="number" step="0.1" placeholder="INR cible min"
+                    value={profile.targetMin}
+                    onChange={(e) => setProfile({ ...profile, targetMin: Number(e.target.value) })} />
+                  <input className="border p-2 rounded" type="number" step="0.1" placeholder="INR cible max"
+                    value={profile.targetMax}
+                    onChange={(e) => setProfile({ ...profile, targetMax: Number(e.target.value) })} />
+                  <input className="border p-2 rounded" type="number" step="0.25" placeholder="Dose hebdo actuelle (mg)"
+                    value={profile.currentWeeklyDoseMg}
+                    onChange={(e) => setProfile({ ...profile, currentWeeklyDoseMg: Number(e.target.value) })} />
+                  <input className="border p-2 rounded" type="number" step="0.5" placeholder="Comprimé (mg)"
+                    value={profile.tabletMg}
+                    onChange={(e) => setProfile({ ...profile, tabletMg: Number(e.target.value) })} />
+                </div>
+              </article>
+
+              <article className="bg-white rounded-2xl shadow p-6 border border-slate-200">
+                <h2 className="text-xl font-semibold text-sky-800 mb-4">Saisie INR</h2>
+                <form onSubmit={handleAddEntry} className="space-y-3">
+                  <input className="border p-2 rounded w-full" type="date" value={form.date}
+                    onChange={(e) => setForm({ ...form, date: e.target.value })} />
+                  <input className="border p-2 rounded w-full" type="number" step="0.1" min="0"
+                    placeholder="INR du jour" value={form.inr}
+                    onChange={(e) => setForm({ ...form, inr: e.target.value })} />
+                  <button className="w-full bg-sky-700 hover:bg-sky-800 text-white rounded p-2">Ajouter mesure</button>
+                </form>
+
+                <div className="mt-4 p-3 rounded bg-sky-50 border border-sky-200 text-sm">
+                  <p><strong>TTR:</strong> {ttr}%</p>
+                  {instabilityAlert ? (
+                    <p className="text-red-700 mt-1">Alerte IA: INR instable (hors zone fréquent).</p>
+                  ) : (
+                    <p className="text-emerald-700 mt-1">Stabilité acceptable pour le moment.</p>
+                  )}
+                </div>
+              </article>
+            </section>
+
+            <section className="grid md:grid-cols-2 gap-6">
+              <article className="bg-white rounded-2xl shadow p-6 border border-slate-200">
+                <h2 className="text-xl font-semibold text-sky-800 mb-4">Algorithme de dosage</h2>
+                {!recommendation ? (
+                  <p className="text-slate-500">Ajoutez une mesure INR pour obtenir une recommandation.</p>
+                ) : (
+                  <>
+                    <p className="text-slate-700">
+                      Dernier INR: <strong>{latest.inr.toFixed(1)}</strong> | Cible {profile.targetMin} - {profile.targetMax}
+                    </p>
+                    <p className="mt-2">
+                      Ajustement hebdomadaire recommandé: <strong>{Math.round(recommendation.adjustment * 100)}%</strong>
+                    </p>
+                    <p>
+                      Nouvelle dose hebdomadaire: <strong>{recommendation.newWeeklyDose} mg</strong>
+                    </p>
+                    <div className="mt-3 grid grid-cols-2 gap-2 text-sm">
+                      {recommendation.plan.map((d) => (
+                        <div key={d.day} className="border rounded p-2 bg-slate-50">
+                          <strong>{d.day}</strong>: {d.tablets} cp ({d.doseMg} mg)
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                )}
+              </article>
+
+              <article className="bg-white rounded-2xl shadow p-6 border border-slate-200">
+                <h2 className="text-xl font-semibold text-sky-800 mb-4">Historique & graphique INR</h2>
+                <div className="relative border rounded bg-white p-2">
+                  <svg viewBox="0 0 100 100" className="w-full h-56">
+                    <rect x="0" y={zoneTop} width="100" height={zoneHeight} fill="#dbeafe" />
+                    <line x1="0" y1="0" x2="0" y2="100" stroke="#cbd5e1" />
+                    <line x1="0" y1="100" x2="100" y2="100" stroke="#cbd5e1" />
+                    {points.map((p, i) =>
+                      i > 0 ? (
+                        <line
+                          key={`line-${p.id}`}
+                          x1={points[i - 1].x}
+                          y1={points[i - 1].y}
+                          x2={p.x}
+                          y2={p.y}
+                          stroke="#0f4c81"
+                          strokeWidth="0.8"
+                        />
+                      ) : null
+                    )}
+                    {points.map((p) => (
+                      <circle key={p.id} cx={p.x} cy={p.y} r="1.5" fill="#0284c7" />
+                    ))}
+                  </svg>
+                </div>
+                <ul className="mt-3 max-h-40 overflow-auto text-sm space-y-1">
+                  {sortedEntries.map((e) => (
+                    <li key={e.id} className="border-b pb-1 flex justify-between">
+                      <span>{e.date}</span>
+                      <strong>INR {e.inr}</strong>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            </section>
+
+            <section className="bg-white rounded-2xl shadow p-6 border border-slate-200">
+              <h2 className="text-xl font-semibold text-sky-800 mb-3">Export & architecture cible</h2>
+              <div className="flex flex-wrap gap-3">
+                <button onClick={printReport} className="bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2 rounded">
+                  Export PDF (impression)
+                </button>
+              </div>
+              <pre className="mt-4 text-xs bg-slate-900 text-slate-100 p-3 rounded overflow-auto">{`-- Extrait structure DB (Supabase/Firebase-ready)
+patients(id, full_name, age, weight, indication, target_min, target_max, current_weekly_dose_mg)
+inr_logs(id, patient_id, date, inr_value, recommended_weekly_dose_mg, ttr_snapshot)
+alerts(id, patient_id, date, level, message, resolved)`}</pre>
+            </section>
+          </main>
+        );
+      };
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
 </html>

@@ -1,0 +1,16 @@
+{
+  "name": "AVK Care - Gestion Sintrom",
+  "short_name": "AVK Care",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f1f5f9",
+  "theme_color": "#0f4c81",
+  "description": "Suivi INR, dosage AVK, historique et alertes de stabilité.",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'><rect width='128' height='128' rx='24' fill='%230f4c81'/><text x='64' y='74' font-size='52' text-anchor='middle' fill='white'>INR</text></svg>",
+      "sizes": "128x128",
+      "type": "image/svg+xml"
+    }
+  ]
+}
